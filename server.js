@@ -2,6 +2,9 @@
 import express from 'express';
 const app = express()
 
+// dotenv
+import 'dotenv/config';
+
 // // parse body
 // const bodyParser = require('body-parser')
 // app.use(bodyParser.json())
@@ -29,4 +32,4 @@ if (process.env.NODE_ENV === 'development') {
   // TODO for production
 }
 
-module.exports = app
+export default app

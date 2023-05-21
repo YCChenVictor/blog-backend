@@ -1,7 +1,7 @@
 import { google } from "googleapis";
 const youtube = google.youtube({ // going to extract to separate file
   version: "v3",
-  auth: apiKey,
+  auth: process.env.YoutubeAPIKey,
 });
 
 const apis = function(app) {
