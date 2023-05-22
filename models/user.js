@@ -1,14 +1,14 @@
 'use strict';
 
-import Sequelize from 'sequelize';
+import { DataTypes } from 'sequelize';
 import sequelize from './index.js';
 
 const user = sequelize.define('user', {
   email: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
   },
   password: {
-    type: Sequelize.STRING
+    type: DataTypes.STRING
   }
 })
 
