@@ -1,7 +1,7 @@
 'use strict';
 
 import { DataTypes } from 'sequelize';
-import sequelize from './index.js';
+import sequelize from './base.js';
 
 const user = sequelize.define('user', {
   email: {
