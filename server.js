@@ -5,20 +5,28 @@ const app = express()
 // dotenv
 import 'dotenv/config';
 
-// // parse body
-// const bodyParser = require('body-parser')
-// app.use(bodyParser.json())
+// parse body
+const bodyParser = require('body-parser')
+app.use(bodyParser.json())
 
 // // passport
 // const passport = require('./middleware/passport.js');
 // app.use(passport.initialize());
+
+// session:
+const session = require('express-session');
+app.use(session({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true,
+}));
 
 // // CORS
 // const cors = require('./middleware/cors.js');
 // app.use(cors);
 
 // API
-import api from './api/api_summary.js';
+import api from './apis/api_summary.js';
 if (process.env.NODE_ENV === 'development') {
   app.listen(5000, () => {
     api(app)

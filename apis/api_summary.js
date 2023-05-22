@@ -1,3 +1,4 @@
+import userAPIs from './user.js';
 import { google } from "googleapis";
 const youtube = google.youtube({ // going to extract to separate file
   version: "v3",
@@ -10,6 +11,8 @@ const apis = function(app) {
     console.log(req.query)
     res.send('Hello World!')
   })
+
+  userAPIs(app)
 
   // youtube
   app.get("/search-youtube-with-googleapis", async (req, res, next) => {
