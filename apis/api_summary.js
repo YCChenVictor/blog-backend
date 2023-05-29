@@ -1,18 +1,18 @@
-import userAPIs from './user.js';
-import { google } from "googleapis";
+const userAPIs = require('./user.js');
+const { google } = require("googleapis");
 const youtube = google.youtube({ // going to extract to separate file
   version: "v3",
   auth: process.env.YoutubeAPIKey,
 });
 
-const apis = function(app) {
+function apis(app) {
   // hello world
   app.get('/', (req, res) => {
-    console.log(req.query)
-    res.send('Hello World!')
-  })
+    console.log(req.query);
+    res.send('Hello World!');
+  });
 
-  userAPIs(app)
+  userAPIs(app);
 
   // youtube
   app.get("/search-youtube-with-googleapis", async (req, res, next) => {
@@ -22,7 +22,7 @@ const apis = function(app) {
         part: "snippet",
         q: searchQuery,
       });
-  
+
       const titles = response.data.items.map((item) => item.snippet.title);
       res.send(titles);
     } catch (err) {
@@ -31,4 +31,4 @@ const apis = function(app) {
   });
 }
 
-export default apis
+module.exports = apis;

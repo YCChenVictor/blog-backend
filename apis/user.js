@@ -1,6 +1,5 @@
-// import passport from '../middleware/passport.js'
-import User from '../models/user.js'
-import jwt from 'jsonwebtoken'
+const User = require('../models/user.js');
+const jwt = require('jsonwebtoken');
 
 const userAPIs = (app) => {
   app.post('/signup', async (req, res, next) => {
@@ -11,12 +10,12 @@ const userAPIs = (app) => {
     }
 
     try {
-      const user = await User.create({
+      const newUser = await User.create({
         email,
         password
       });
 
-      const token = jwt.sign({ email: user.email }, 'secret_key'); // Wrap the payload in an object
+      const token = jwt.sign({ email: newUser.email }, 'secret_key'); // Wrap the payload in an object
       res.json({ token });
     } catch (error) {
       // Handle error during user creation
@@ -25,9 +24,9 @@ const userAPIs = (app) => {
     }
   });
 
-  app.post('/login', passport.authenticate('local'), (req, res) => {
-    res.status(200).json({ token: req.user.token });
-  });
+  // app.post('/login', passport.authenticate('local'), (req, res) => {
+  //   res.status(200).json({ token: req.user.token });
+  // });
 };
 
-export default userAPIs
+module.exports = userAPIs;
