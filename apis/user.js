@@ -1,5 +1,6 @@
 const User = require('../models/user.js');
 const jwt = require('jsonwebtoken');
+const passport = require('../middleware/passport.js');
 
 const userAPIs = (app) => {
   app.post('/signup', async (req, res, next) => {
@@ -24,9 +25,9 @@ const userAPIs = (app) => {
     }
   });
 
-  // app.post('/login', passport.authenticate('local'), (req, res) => {
-  //   res.status(200).json({ token: req.user.token });
-  // });
+  app.post('/login', passport.authenticate('local'), (req, res) => {
+    res.status(200).json({ token: req.user.token });
+  });
 };
 
 module.exports = userAPIs;

@@ -9,9 +9,9 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-// // passport
-// const passport = require('./middleware/passport.js');
-// app.use(passport.initialize());
+// passport
+const passport = require('./middleware/passport.js');
+app.use(passport.initialize());
 
 // session:
 const session = require('express-session');
