@@ -1,26 +1,5 @@
-const puppeteer = require('puppeteer')
-const cheerio = require('cheerio')
-const userAPIs = require('./user.js')
-const { google } = require("googleapis")
-const randomColor = require('randomcolor');
-const fs = require('fs');
-const path = require('path');
-const youtube = google.youtube({ // going to extract to separate file
-  version: "v3",
-  auth: process.env.YoutubeAPIKey,
-})
-
-function apis(app) {
-  // hello world
-  app.get('/', (req, res) => {
-    console.log(req.query);
-    res.send('Hello World!');
-  });
-
-  userAPIs(app);
-
-  // nodeGraph
-  app.get('/nodeGraph', async (req, res) => {
+const frontendComponentApis = (app) => {
+  app.get('/node-graph', async (req, res) => {
     // I am going to use DFS concept to solve this graph like problem.
     const domain = 'http://localhost:3000'
     const queue = ['http://localhost:3000/blog/software/main'];
@@ -143,21 +122,58 @@ function apis(app) {
       });
   })
 
-  // youtube
-  app.get("/search-youtube-with-googleapis", async (req, res, next) => {
-    try {
-      const searchQuery = req.query.search_query;
-      const response = await youtube.search.list({
-        part: "snippet",
-        q: searchQuery,
+  app.get('/searchbar', async () => {
+    const items = [];
+  
+    crawl = () => {
+      const items = [];
+      
+      return new Promise((resolve, reject) => {
+        request(articleList, (err, response, body) => {
+          if (err) {
+            reject(err);
+          } else {
+            const $ = cheerio.load(body);
+            $('a[href^="/blog"][href$=".html"]').each((i, link) => {
+              const href = $(link).attr('href');
+              const startIndex = href.indexOf('/blog/') + '/blog/'.length;
+              const endIndex = href.indexOf('/', startIndex);
+              const category = href.substring(startIndex, endIndex);
+              const absoluteUrl = domain + href;
+              request(absoluteUrl, (err, response, body) => {
+                if (err) {
+                  reject(err);
+                } else {
+                  const $article = cheerio.load(body);
+                  const title = $article('h1').text();
+                  const content = $article.text().replace(/(\r\n|\n|\r)/gm, "").replace(/ +(?= )/g,'');
+                  items.push({'id': i, 'title': title, 'content': content, 'url': href, 'category': category});
+                  if (items.length === $('a[href^="/blog"][href$=".html"]').length) {
+                    resolve({ items });
+                  }
+                }
+              });
+            });
+          }
+        });
       });
-
-      const titles = response.data.items.map((item) => item.snippet.title);
-      res.send(titles);
-    } catch (err) {
-      next(err);
     }
-  });
-}
 
-module.exports = apis;
+    storeAsFile = (result) => {
+      // Convert JSON data to a string
+      const jsonString = JSON.stringify(result);
+    
+      // Write the JSON data to a file
+      fs.writeFile('./data/searchBar.json', jsonString, function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+      });
+    }
+
+    crawl().then((structure) => {
+      storeAsFile(structure)
+    })
+  })
+};
+
+module.exports = frontendComponentApis;
