@@ -1,8 +1,15 @@
+const puppeteer = require('puppeteer')
+const cheerio = require('cheerio')
+const randomColor = require('randomcolor');
+const path = require('path');
+const fs = require('fs');
+
 const frontendComponentApis = (app) => {
   app.get('/node-graph', async (req, res) => {
     // I am going to use DFS concept to solve this graph like problem.
+    const { category } = req.query;
     const domain = 'http://localhost:3000'
-    const queue = ['http://localhost:3000/blog/software/main'];
+    const queue = [`http://localhost:3000/blog/${category}/main`];
     const visited = new Set();
     const structure = {};
   
@@ -40,7 +47,7 @@ const frontendComponentApis = (app) => {
     }
 
     function storeAsFile(result) {
-      const filePath = 'nodeGraph.json'
+      const filePath = `data/${category}/nodeGraph.json`
       // Convert JSON data to a string
       const jsonString = JSON.stringify(result);
     

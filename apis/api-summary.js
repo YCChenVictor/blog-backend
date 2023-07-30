@@ -1,9 +1,6 @@
-const puppeteer = require('puppeteer')
-const cheerio = require('cheerio')
 const userAPIs = require('./user.js')
 const frontendComponentApis = require('./frontend-component.js')
 const { google } = require("googleapis")
-const randomColor = require('randomcolor');
 const fs = require('fs');
 const path = require('path');
 const youtube = google.youtube({ // going to extract to separate file
