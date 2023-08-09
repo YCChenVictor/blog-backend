@@ -1,11 +1,20 @@
 const Trie = require('../examples/trie.js')
 
 describe('Trie', () => {
-  // we can extract all the same code int to before block
+  let trie = new Trie()
+  beforeEach(() => {
+    trie.insert('bear')
+    trie.insert('bell')
+  })
 
-  it('should insert a word', () => {
-    trie = new Trie()
-    trie.insert('apple')
-    expect(trie.search('apple')).toEqual(true)
+  it('should insert words', () => {
+    expect(trie.search('bear')).toEqual(true)
+    expect(trie.search('bell')).toEqual(true)
+  })
+
+  it('should delete a word', () => {
+    trie.delete('bell')
+    expect(trie.search('bell')).toEqual(false)
+    expect(trie.search('bear')).toEqual(true)
   })
 })
