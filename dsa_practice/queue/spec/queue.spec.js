@@ -28,5 +28,11 @@ describe('Queue', () => {
     expect(testQueue.peek()).toEqual(1);
   });
 
-  // more test to be continued
+  test('#isEmpty', () => {
+    expect(testQueue.isEmpty()).toEqual(false);
+  })
+
+  test('#size', () => {
+    expect(testQueue.size()).toEqual(5);
+  })
 });
