@@ -13,11 +13,14 @@ const customizedPassport = passport.use(
       username,
       password
     })
-
+    const payload = {
+      email: username,
+      expireAt: Math.floor(Date.now() / 1000) + (60 * 60) // Token will expire in 1 hour
+    }
     if (!user) {
       return done(null, false, { message: 'no user' });
     } else {
-      const token = jwt.sign(user.email, 'secret_key');
+      const token = jwt.sign(payload, 'secret_key');
       return done(null, {token: token});
     }
   })
