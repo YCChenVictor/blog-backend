@@ -20,7 +20,7 @@ const userAPIs = (app) => {
         email: email,
         expireAt: Math.floor(Date.now() / 1000) + (60 * 60) // Token will expire in 1 hour
       }
-      const token = jwt.sign(payload, 'secret_key'); // Wrap the payload in an object
+      const token = jwt.sign(payload, process.env.JWT_SECRET_KEY); // Wrap the payload in an object
       res.json({ token });
     } catch (error) {
       // Handle error during user creation

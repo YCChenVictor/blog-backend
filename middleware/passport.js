@@ -1,10 +1,12 @@
-const User = require('../models/user.js');
-const LocalStrategy = require('passport-local').Strategy;
-const passport = require('passport');
-const jwt = require('jsonwebtoken');
+const User = require('../models/user.js')
+const LocalStrategy = require('passport-local').Strategy
+const passport = require('passport')
+const jwt = require('jsonwebtoken')
+const passportJWT = require('passport-jwt')
+const ExtractJwt = passportJWT.ExtractJwt
+const JwtStrategy = passportJWT.Strategy
 
-const customizedPassport = passport.use(
-  new LocalStrategy({ // here can be changed to JWT strategy
+const localStrategy = new LocalStrategy({ // here can be changed to JWT strategy
     usernameField: 'email',
     passwordField: 'password',
     session: false,
@@ -18,20 +20,28 @@ const customizedPassport = passport.use(
       expireAt: Math.floor(Date.now() / 1000) + (60 * 60) // Token will expire in 1 hour
     }
     if (!user) {
-      return done(null, false, { message: 'no user' });
+      return done(null, false, { message: 'no user' })
     } else {
-      const token = jwt.sign(payload, 'secret_key');
-      return done(null, {token: token});
+      const token = jwt.sign(payload, process.env.JWT_SECRET_KEY)
+      return done(null, {token: token})
     }
-  })
-);
+})
 
-customizedPassport.serializeUser(function(user, done) {
-  done(null, user);
-});
+const jwtOptions = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env.JWT_SECRET_KEY
+}
+const jwtStrategy = new JwtStrategy(jwtOptions, (jwtPayload, done) => {
+  done(null, jwtPayload)
+})
 
-customizedPassport.deserializeUser(function(user, done) {
-  done(null, user);
-});
+passport.use(localStrategy)
+passport.use(jwtStrategy)
+passport.serializeUser(function(user, done) {
+  done(null, user)
+})
+passport.deserializeUser(function(user, done) {
+  done(null, user)
+})
 
-module.exports = customizedPassport
+module.exports = passport
