@@ -32,6 +32,7 @@ const jwtOptions = {
   secretOrKey: process.env.JWT_SECRET_KEY
 }
 const jwtStrategy = new JwtStrategy(jwtOptions, (jwtPayload, done) => {
+  console.log(jwtPayload)
   done(null, jwtPayload)
 })
 
