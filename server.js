@@ -9,9 +9,9 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-// passport
-const passport = require('./middleware/passport.js');
-app.use(passport.initialize());
+// // passport
+// const passport = require('./middleware/passport.js');
+// app.use(passport.initialize());
 
 // session:
 const session = require('express-session');
@@ -26,7 +26,7 @@ const cors = require('./middleware/cors.js');
 app.use(cors);
 
 // API
-const api = require('./apis/api-summary.js');
+const api = require('./apis/summary.js');
 
 // start
 if (process.env.NODE_ENV === 'development') {
