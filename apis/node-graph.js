@@ -114,7 +114,7 @@ const nodeGraph = (app) => {
       }
     
       function getGroupFrom(url) {
-        return url.split("/")[2]
+        return url.split("/")[3]
       }
     
       function giveColorByGroupTo(nodes) {
