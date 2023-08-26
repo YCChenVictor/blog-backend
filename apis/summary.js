@@ -5,7 +5,6 @@ const gpt = require('./gpt.js')
 
 function apis(app) {
   app.get('/', (req, res) => {
-    console.log(req.query)
     res.send('Hello World!')
   })
 

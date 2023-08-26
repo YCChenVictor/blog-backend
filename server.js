@@ -32,11 +32,8 @@ const api = require('./apis/summary.js');
 if (process.env.NODE_ENV === 'development') {
   app.listen(5000, () => {
     api(app);
+    console.log('in development mode')
     console.log('now listening to 5000');
-  });
-} else if (process.env.NODE_ENV === 'test') {
-  app.listen(8080, () => {
-    api(app);
   });
 } else {
   // TODO for production
