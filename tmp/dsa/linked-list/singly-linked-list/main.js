@@ -75,15 +75,15 @@ class LinkedList {
   }
 
   printList() {
-    const list = [];
-    let currentNode = this.head;
+    const list = []
+    let currentNode = this.head
 
-    while (currentNode !== null) {
-      list.push(currentNode.value);
-      currentNode = currentNode.next;
+    while (currentNode !== null && currentNode !== undefined) {
+      list.push(currentNode.value)
+      currentNode = currentNode.next
     }
 
-    return list;
+    return list
   }
 
   // Update

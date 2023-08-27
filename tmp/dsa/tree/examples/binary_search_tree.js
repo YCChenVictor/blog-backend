@@ -1,4 +1,4 @@
-BinaryTree = require('./binary_tree.js')
+BinaryTree = require('../main.js')
 Node = require('./binary_tree_node.js')
 
 class BinarySearchTree extends BinaryTree {

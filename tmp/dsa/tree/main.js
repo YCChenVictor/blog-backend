@@ -11,6 +11,7 @@ class BinaryTreeNode {
 class BinaryTree {
   constructor() {
     this.root = null;
+    this.queue = []
   }
 
   addNode(value) { // will use recursive
@@ -92,7 +93,17 @@ class BinaryTree {
   }
 
   insertNode(parentNode, newNode) {
-    // there is no specific insertion method for binary tree
+    // Insert it with the order of the values
+    if (parentNode.left === null) {
+      parentNode.left = newNode
+      this.queue.push(newNode)
+    } else if (parentNode.right === null) {
+      parentNode.right = newNode
+      this.queue.push(newNode)
+    } else {
+      const currentParentNode = this.queue.shift()
+      this.insertNode(currentParentNode, newNode)
+    }
   }
 }
 

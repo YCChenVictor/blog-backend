@@ -22,6 +22,14 @@ const nodeGraph = (app) => {
     const visited = new Set()
     const structure = {}
   
+    crawl(queue, visited, domain)
+      .then((structure) => {
+        storeAsFile(desiredFormat(structure))
+      })
+      .catch((error) => {
+        console.error('Error occurred during crawling:', error);
+      });
+
     function crawl(queue, visited, domain) { // Promise in this function
       const childNodes = []
       let url = queue.shift()
@@ -79,12 +87,9 @@ const nodeGraph = (app) => {
       let nodes
       let links
       nodes = Object.keys(structure).map((value, index) => {
-        let name
-        const matches = value.match(/\/([^\/]+)\.html$/)
-        if(matches !== null) {
-          name = matches[1]
-        } else {
-          name = value
+        let name = value.split('/').slice(-1)[0]
+        if (name === 'main') {
+          name = value.split('/').slice(-2)[0]
         }
         return {
           id: index + 1,
@@ -128,14 +133,6 @@ const nodeGraph = (app) => {
     
       return { nodes: nodes, links: links }
     }
-  
-    crawl(queue, visited, domain)
-      .then((structure) => {
-        storeAsFile(desiredFormat(structure))
-      })
-      .catch((error) => {
-        console.error('Error occurred during crawling:', error);
-      });
   })
 };
 
