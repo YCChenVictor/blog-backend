@@ -1,4 +1,4 @@
-const Graph = require('../examples/graph.js');
+const Graph = require('../examples/undirect-graph.js');
 
 describe('Graph', () => {
   let testGraph

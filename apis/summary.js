@@ -1,7 +1,7 @@
 const user = require('./user.js')
 const nodeGraph = require('./node-graph.js')
 const searchbar = require('./searchbar.js')
-const gpt = require('./gpt.js')
+const gptApis = require('./gpt-apis.js')
 
 function apis(app) {
   app.get('/', (req, res) => {
@@ -11,7 +11,7 @@ function apis(app) {
   user(app)
   nodeGraph(app)
   searchbar(app)
-  gpt(app)
+  gptApis(app)
 }
 
 module.exports = apis;
