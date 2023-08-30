@@ -22,6 +22,15 @@ class LinkedList {
     }
   }
 
+  prependNode(node) {
+    if (!this.head) {
+      this.head = node
+    } else {
+      node.next = this.head
+      this.head = node
+    }
+  }
+
   append(value) {
     const newNode = new Node(value);
 
@@ -113,4 +122,4 @@ class LinkedList {
   }
 }
 
-module.exports = LinkedList;
+module.exports = { Node, LinkedList }
