@@ -10,16 +10,16 @@ class DirectedGraph {
   addVertex(vertex) {
     this.adjacencyList[vertex] = []
   }
-  
+
   addEdge(vertex1, vertex2) {
     this.adjacencyList[vertex1].push(vertex2)
   }
-  
+
   // read
   getNeighbors(vertex) {
     return this.adjacencyList[vertex]
   }
-  
+
 //   getVertices() {
 //     return Object.keys(this.adjacencyList).map(Number)
 //   }

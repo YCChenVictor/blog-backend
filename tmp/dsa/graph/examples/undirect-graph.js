@@ -1,4 +1,4 @@
-class Graph {
+class UndirectedGraph {
   // Adjacency list form
   // Undirected edges
   // No attributes on edges and nodes
@@ -67,4 +67,4 @@ class Graph {
   }
 }
 
-module.exports = Graph;
+module.exports = UndirectedGraph
