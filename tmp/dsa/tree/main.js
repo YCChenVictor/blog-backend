@@ -10,15 +10,17 @@ class BinaryTreeNode {
 
 class BinaryTree {
   constructor() {
-    this.root = null;
+    this.root = null
     this.queue = []
+    this.currentParentNode = this.root
   }
 
   addNode(value) { // will use recursive
     if (this.root === null) {
       this.root = new BinaryTreeNode(value)
+      this.currentParentNode = this.root
     } else {
-      this.insertNode(this.root, new BinaryTreeNode(value))
+      this.insertNode(this.currentParentNode, new BinaryTreeNode(value)) // It add BinaryTreeNode but not BinaryTree
     }
   }
 
@@ -93,16 +95,20 @@ class BinaryTree {
   }
 
   insertNode(parentNode, newNode) {
-    // Insert it with the order of the values
-    if (parentNode.left === null) {
-      parentNode.left = newNode
+    this.currentParentNode = parentNode
+    if(this.currentParentNode.left === null) {
+      this.currentParentNode.left = newNode
       this.queue.push(newNode)
-    } else if (parentNode.right === null) {
-      parentNode.right = newNode
+    } else if(this.currentParentNode.right === null) {
+      this.currentParentNode.right = newNode
       this.queue.push(newNode)
     } else {
-      const currentParentNode = this.queue.shift()
-      this.insertNode(currentParentNode, newNode)
+      if(this.currentParentNode.left === null || this.currentParentNode.right === null) {
+        this.insertNode(this.currentParentNode, newNode)
+      } else {
+        this.currentParentNode = this.queue.shift()
+        this.insertNode(this.currentParentNode, newNode)
+      }
     }
   }
 }
