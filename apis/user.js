@@ -3,6 +3,10 @@ const jwt = require('jsonwebtoken');
 const passport = require('../middleware/passport.js');
 
 const userAPIs = (app) => {
+  app.get('/authentication', passport.authenticate('jwt'), (req, res) => {
+    res.status(200).json({ loggedIn: true })
+  })
+
   app.post('/signup', async (req, res, next) => {
     const { email, password } = req.body.params; // Destructure email and password from req.body.params
 

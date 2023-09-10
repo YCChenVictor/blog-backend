@@ -6,10 +6,6 @@ const fs = require('fs')
 const passport = require('../middleware/passport.js')
 
 const nodeGraph = (app) => {
-  app.get('/node-graph-init', passport.authenticate('jwt'), (req, res) => {
-    res.status(200).json({ loggedIn: true })
-  })
-
   app.get('/node-graph', async () => {
     // The problem is currently I did not host backend on production, so there is no way for frontend to get the data.
   })
@@ -21,10 +17,12 @@ const nodeGraph = (app) => {
     const queue = [`http://localhost:3000/blog/${category}/main`]
     const visited = new Set()
     const structure = {}
+    const items = []
   
     crawl(queue, visited, domain)
       .then((structure) => {
-        storeAsFile(desiredFormat(structure))
+        storeSearchBarAsFile({"items": items})
+        storeNodeGraphAsFile(desiredFormat(structure))
       })
       .catch((error) => {
         console.error('Error occurred during crawling:', error);
@@ -45,6 +43,9 @@ const nodeGraph = (app) => {
             await page.goto(url, { waitUntil: 'networkidle2' })
             const html = await page.content()
             const $ = cheerio.load(html)
+
+            getArticleContent($, url)
+
             $('a').each((i, link) => {
               const href = $(link).attr('href')
               if (href && href.startsWith('/blog/') && !href.includes('#')) {
@@ -63,7 +64,34 @@ const nodeGraph = (app) => {
       }
     }
 
-    function storeAsFile(result) {
+    getArticleContent = ($, url) => {
+      const baseUrl = 'http://localhost:3000' // should be changed in the future according to environment variable
+      const title = $('h1').text()
+      const content = $('#article').text().replace(/(\r\n|\n|\r)/gm, "").replace(/ +(?= )/g,'')
+      const item = {'title': title, 'content': content, 'url': url.replace(baseUrl, '')}
+      items.push(item)
+    }
+
+    function storeSearchBarAsFile(result) {
+      const filePath = `data/${category}/searchBar.json`
+      // Convert JSON data to a string
+      const jsonString = JSON.stringify(result)
+    
+      // Create the necessary directories if they don't exist
+      const dirname = path.dirname(__dirname, filePath)
+
+      if (!fs.existsSync(dirname)) {
+        fs.mkdir(dirname, { recursive: true })
+      }
+
+      // Write the JSON data to a file
+      fs.writeFile(filePath, jsonString, function (err) {
+        if (err) throw err
+      })
+      console.log('Save Search Bar Data!')
+    }
+
+    function storeNodeGraphAsFile(result) {
       const filePath = `data/${category}/nodeGraph.json`
       // Convert JSON data to a string
       const jsonString = JSON.stringify(result)
@@ -79,11 +107,10 @@ const nodeGraph = (app) => {
       fs.writeFile(filePath, jsonString, function (err) {
         if (err) throw err
       })
-      console.log('Saved!')
+      console.log('Save Node Graph Data!')
     }
     
     function desiredFormat(structure) {
-      console.log(structure)
       let nodes
       let links
       nodes = Object.keys(structure).map((value, index) => {
