@@ -1,20 +1,21 @@
 // init
-const express = require('express');
+import express from 'express';
 const app = express();
 
 // dotenv
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
 // parse body
-const bodyParser = require('body-parser');
+import bodyParser from 'body-parser';
 app.use(bodyParser.json());
 
 // // passport
-// const passport = require('./middleware/passport.js');
+// import passport from './middleware/passport.js';
 // app.use(passport.initialize());
 
 // session:
-const session = require('express-session');
+import session from 'express-session';
 app.use(session({
   secret: 'keyboard cat',
   resave: true,
@@ -22,21 +23,22 @@ app.use(session({
 }));
 
 // CORS
-const cors = require('./middleware/cors.js');
+import cors from './middleware/cors.js';
 app.use(cors);
 
 // API
-const api = require('./apis/summary.js');
+import api from './apis/summary.js';
+api(app);
 
 // start
 if (process.env.NODE_ENV === 'development') {
-  app.listen(5000, () => {
-    api(app);
-    console.log('in development mode')
-    console.log('now listening to 5000');
+  const PORT = 5001;
+  app.listen(PORT, () => {
+    console.log('in development mode');
+    console.log(`now listening to ${PORT}`);
   });
 } else {
   // TODO for production
 }
 
-module.exports = app;
+export default app;

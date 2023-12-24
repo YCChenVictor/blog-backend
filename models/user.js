@@ -1,8 +1,8 @@
 'use strict';
-
-const Sequelize = require('sequelize');
-const sequelize = require('./index.js');
-
+  
+import Sequelize from 'sequelize';
+import sequelize from './index.js';
+        
 const user = sequelize.define('user', {
   email: {
     type: Sequelize.STRING,
@@ -10,6 +10,6 @@ const user = sequelize.define('user', {
   password: {
     type: Sequelize.STRING
   }
-});
-
-module.exports = user;
+})
+        
+export default user

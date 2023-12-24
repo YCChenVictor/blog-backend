@@ -1,19 +1,19 @@
-const user = require('./user.js')
-const nodeGraph = require('./node-graph.js')
-const searchbar = require('./searchbar.js')
-const gptApis = require('./gpt-apis.js')
-const autoFrontend = require('./auto-frontend.js')
+import user from './user.js';
+// import nodeGraph from './node-graph.js';
+// import searchbar from './searchbar.js';
+// import gptApis from './gpt-apis.js';
+// import autoFrontend from './auto-frontend.js';
 
 function apis(app) {
   app.get('/', (req, res) => {
-    res.send('Hello World!')
-  })
+    res.send('Hello World!');
+  });
 
-  user(app)
-  nodeGraph(app)
-  searchbar(app)
-  gptApis(app)
-  autoFrontend(app)
+  user(app);
+  // nodeGraph(app);
+  // searchbar(app);
+  // gptApis(app);
+  // autoFrontend(app);
 }
 
-module.exports = apis;
+export default apis;

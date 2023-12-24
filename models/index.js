@@ -1,17 +1,18 @@
 'use strict';
 
-const dotenv = require('dotenv');
+import dotenv from 'dotenv';
 dotenv.config();
 
-const Sequelize = require('sequelize');
+import { Sequelize } from 'sequelize';
 
-let sequelize
+let sequelize;
+
 if (process.env.NODE_ENV === 'development') {
-  sequelize = new Sequelize(process.env.DEV_DATABASE_URL)
+  sequelize = new Sequelize(process.env.DEV_DATABASE_URL);
 } else if (process.env.NODE_ENV === 'test') {
-  sequelize = new Sequelize(process.env.TEST_DATABASE_URL)
+  sequelize = new Sequelize(process.env.TEST_DATABASE_URL);
 } else {
-  sequelize = new Sequelize(process.env.DATABASE_URL)
+  sequelize = new Sequelize(process.env.DATABASE_URL);
 }
 
-module.exports = sequelize;
+export default sequelize;
