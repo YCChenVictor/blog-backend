@@ -1,7 +1,7 @@
 import user from './user.js';
 // import nodeGraph from './node-graph.js';
 // import searchbar from './searchbar.js';
-// import gptApis from './gpt-apis.js';
+import gptApis from './gpt-apis.js';
 // import autoFrontend from './auto-frontend.js';
 
 function apis(app) {
@@ -12,7 +12,7 @@ function apis(app) {
   user(app);
   // nodeGraph(app);
   // searchbar(app);
-  // gptApis(app);
+  gptApis(app);
   // autoFrontend(app);
 }
 

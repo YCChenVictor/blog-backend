@@ -10,9 +10,9 @@ dotenv.config();
 import bodyParser from 'body-parser';
 app.use(bodyParser.json());
 
-// // passport
-// import passport from './middleware/passport.js';
-// app.use(passport.initialize());
+// passport
+import passport from './middleware/passport.js';
+app.use(passport.initialize());
 
 // session:
 import session from 'express-session';

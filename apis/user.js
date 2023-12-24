@@ -20,6 +20,8 @@ const userAPIs = (app) => {
         password,
       });
 
+      console.log(newUser)
+
       const payload = {
         email: email,
         expireAt: Math.floor(Date.now() / 1000) + 60 * 60, // Token will expire in 1 hour

@@ -1,5 +1,5 @@
-const passport = require('../middleware/passport.js')
-const { OpenAI } = require("openai")
+import passport from '../middleware/passport.js';
+import { OpenAI } from "openai";
 
 const gptApis = (app) => {
   app.get('/gpt-init', passport.authenticate('jwt'), (req, res) => {
@@ -63,4 +63,4 @@ const gptApis = (app) => {
   })
 }
 
-module.exports = gptApis
+export default gptApis;
