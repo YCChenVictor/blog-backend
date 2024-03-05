@@ -1,12 +1,38 @@
 import passport from '../middleware/passport.js';
 import { OpenAI } from "openai";
+import { Request, Response } from 'express';
 
-const gptApis = (app) => {
-  app.get('/gpt-init', passport.authenticate('jwt'), (req, res) => {
+const gptApis = (app: any) => {
+  app.get('/gpt-init', passport.authenticate('jwt'), (req: Request, res: Response) => {
     res.status(200).json({ loggedIn: true })
   })
 
-  app.post('/create-article', passport.authenticate('jwt'), async (req, res) => {
+  app.post('/requests', passport.authenticate('jwt'), async (req: Request, res: Response) => {
+    try {
+      const response = ```
+        import React from 'react';
+
+        const MyComponent = () => {
+          return (
+            <div>
+              <h1>Hello, React!</h1>
+              <p>This is a basic React component.</p>
+            </div>
+          );
+        };
+        
+        export default MyComponent;
+      ```
+      res.status(200).json({
+        response: response
+      })
+    } catch (error) {
+      console.error('Error generating text:', error)
+      return error
+    }
+  })
+
+  app.post('/create-article', passport.authenticate('jwt'), async (req: Request, res: Response) => {
     try { // comment out currently and write test and build frontend first
       // const openai = new OpenAI({
       //   apiKey: process.env.GPT_KEY,
