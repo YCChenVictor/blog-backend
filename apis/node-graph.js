@@ -11,6 +11,7 @@ const nodeGraph = (app) => {
   })
 
   app.post('/node-graph', async (req, res) => {
+    console.log('testing')
     // I am going to use DFS concept to solve this graph like problem.
     const { category } = req.query
     const domain = 'http://localhost:3000'

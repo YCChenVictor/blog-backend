@@ -8,5 +8,11 @@ export default function(req, res, next) {
   // Set to true if you need the website to include cookies in the requests sent to the API (e.g. in case you use sessions)
   res.setHeader('Access-Control-Allow-Credentials', true)
   // Pass to the next layer of middleware
-  next()
+
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+  } else {
+    next();
+  }
 }
