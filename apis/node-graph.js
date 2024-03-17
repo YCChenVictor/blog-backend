@@ -10,7 +10,6 @@ const nodeGraph = (app) => {
   })
 
   app.post('/node-graph', async (req, res) => {
-    console.log('testing')
     // I am going to use DFS concept to solve this graph like problem.
     const { category } = req.query
     const domain = 'http://localhost:3000'
@@ -21,6 +20,7 @@ const nodeGraph = (app) => {
   
     crawl(queue, visited, domain)
       .then((structure) => {
+        console.log(structure)
         storeSearchBarAsFile({"items": items})
         storeNodeGraphAsFile(desiredFormat(structure))
       })
@@ -78,7 +78,7 @@ const nodeGraph = (app) => {
       const jsonString = JSON.stringify(result)
     
       // Create the necessary directories if they don't exist
-      const dirname = path.dirname(__dirname, filePath)
+      const dirname = path.dirname(filePath)
 
       if (!fs.existsSync(dirname)) {
         fs.mkdir(dirname, { recursive: true })
@@ -97,7 +97,7 @@ const nodeGraph = (app) => {
       const jsonString = JSON.stringify(result)
     
       // Create the necessary directories if they don't exist
-      const dirname = path.dirname(__dirname, filePath)
+      const dirname = path.dirname(filePath)
 
       if (!fs.existsSync(dirname)) {
         fs.mkdir(dirname, { recursive: true })
@@ -135,9 +135,14 @@ const nodeGraph = (app) => {
           }
         })
       }).flat().filter(obj => obj !== undefined)
+
+      console.log(nodes)
+      console.log(links)
+
+      return { nodes: nodes, links: links }
     
-      function getIdFromNodeName(url) { // It will get link from node
-        result = nodes.find(node => node.url === url)
+      function getIdFromNodeName(url) {
+        const result = nodes.find((node) => node.url === url)
         if(result) {
           return result['id']
         } else {
@@ -157,8 +162,6 @@ const nodeGraph = (app) => {
         })
         return nodes
       }
-    
-      return { nodes: nodes, links: links }
     }
   })
 };
