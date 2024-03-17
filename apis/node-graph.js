@@ -1,9 +1,8 @@
-const puppeteer = require('puppeteer')
-const cheerio = require('cheerio')
-const randomColor = require('randomcolor')
-const path = require('path')
-const fs = require('fs')
-const passport = require('../middleware/passport.js')
+import puppeteer from 'puppeteer'
+import cheerio from 'cheerio'
+import randomColor from 'randomcolor'
+import path from 'path'
+import fs from 'fs'
 
 const nodeGraph = (app) => {
   app.get('/node-graph', async () => {
@@ -65,7 +64,7 @@ const nodeGraph = (app) => {
       }
     }
 
-    getArticleContent = ($, url) => {
+    function getArticleContent($, url) {
       const baseUrl = 'http://localhost:3000' // should be changed in the future according to environment variable
       const title = $('h1').text()
       const content = $('#article').text().replace(/(\r\n|\n|\r)/gm, "").replace(/ +(?= )/g,'')
@@ -164,4 +163,4 @@ const nodeGraph = (app) => {
   })
 };
 
-module.exports = nodeGraph;
+export default nodeGraph
