@@ -4,7 +4,7 @@ import path from 'path'
 import fs from 'fs'
 import randomColor from 'randomcolor'
 
-export const handlePostRequest = async (req, res) => {
+export const handlePostRequest = async () => {
   // I am going to use DFS concept to solve this graph like problem.
   // const { category } = req.query
   const category = 'software' // remove this line after testing
@@ -24,8 +24,8 @@ export const handlePostRequest = async (req, res) => {
       console.error('Error occurred during crawling:', error);
     });
 
-  function crawl(queue, visited, domain) { // Promise in this function
-    const childNodes = []
+  function crawl(queue: string[], visited: Set<string>, domain: string) { // Promise in this function
+    const childNodes: string[] = []
     let url = queue.shift()
     console.log(url)
     if (!url) {

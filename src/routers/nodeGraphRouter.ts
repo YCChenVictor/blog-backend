@@ -1,5 +1,5 @@
 import express from 'express';
-import { handlePostRequest } from '../controllers/nodeGraphController.js';
+import { handlePostRequest } from '../controllers/nodeGraphController';
 import asyncHandler from "express-async-handler"
 
 const router = express.Router();
