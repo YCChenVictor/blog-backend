@@ -1,6 +1,13 @@
+import puppeteer from 'puppeteer'
+import cheerio from 'cheerio'
+import path from 'path'
+import fs from 'fs'
+import randomColor from 'randomcolor'
+
 export const handlePostRequest = async (req, res) => {
   // I am going to use DFS concept to solve this graph like problem.
-  const { category } = req.query
+  // const { category } = req.query
+  const category = 'software' // remove this line after testing
   const domain = 'http://localhost:3000'
   const queue = [`http://localhost:3000/blog/${category}/main`]
   const visited = new Set()
@@ -10,7 +17,7 @@ export const handlePostRequest = async (req, res) => {
   crawl(queue, visited, domain)
     .then((structure) => {
       console.log(structure)
-      storeSearchBarAsFile({"items": items})
+      // storeSearchBarAsFile({"items": items})
       storeNodeGraphAsFile(desiredFormat(structure))
     })
     .catch((error) => {
@@ -20,6 +27,7 @@ export const handlePostRequest = async (req, res) => {
   function crawl(queue, visited, domain) { // Promise in this function
     const childNodes = []
     let url = queue.shift()
+    console.log(url)
     if (!url) {
       return Promise.resolve(structure) // resolve with returning the final structure
     } else {
@@ -61,24 +69,22 @@ export const handlePostRequest = async (req, res) => {
     items.push(item)
   }
 
-  function storeSearchBarAsFile(result) {
-    const filePath = `data/${category}/searchBar.json`
-    // Convert JSON data to a string
-    const jsonString = JSON.stringify(result)
+  // function storeSearchBarAsFile(result) {
+  //   const filePath = `data/${category}/searchBar.json`
+  //   // Convert JSON data to a string
+  //   const jsonString = JSON.stringify(result)
   
-    // Create the necessary directories if they don't exist
-    const dirname = path.dirname(filePath)
+  //   // Create the necessary directories if they don't exist
+  //   const dirname = path.dirname(filePath)
 
-    if (!fs.existsSync(dirname)) {
-      fs.mkdir(dirname, { recursive: true })
-    }
+  //   if (!fs.existsSync(dirname)) {
+  //     fs.mkdir(dirname, { recursive: true })
+  //   }
 
-    // Write the JSON data to a file
-    fs.writeFile(filePath, jsonString, function (err) {
-      if (err) throw err
-    })
-    console.log('Save Search Bar Data!')
-  }
+  //   // Write the JSON data to a file
+  //   fs.writeFileSync(filePath, jsonString)
+  //   console.log('Save Search Bar Data!')
+  // }
 
   function storeNodeGraphAsFile(result) {
     const filePath = `data/${category}/nodeGraph.json`
