@@ -27,8 +27,10 @@ import cors from './middleware/cors.js'
 app.use(cors)
 
 // API
-import api from './apis/summary.js'
-api(app)
+// import api from './routers/summary.js'
+// api(app)
+import nodeGraphRouter from './routers/nodeGraphRouter.js'
+app.use('/', nodeGraphRouter);
 
 // start
 if (process.env.NODE_ENV === 'development') {

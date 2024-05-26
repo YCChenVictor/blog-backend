@@ -1,5 +1,5 @@
 import user from './user.js'
-import nodeGraph from './node-graph.js'
+import nodeGraph from './nodeGraphRouter.js'
 // import searchbar from './searchbar.js'
 // import gptApis from './gpt-apis.ts'
 // import autoFrontend from './auto-frontend.js'
