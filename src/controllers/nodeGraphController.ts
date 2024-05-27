@@ -12,12 +12,28 @@ export const create = async (req: Request, res: Response, next: NextFunction) =>
   const domain = 'http://localhost:3000'
   const queue = [`http://localhost:3000/blog/${category}/main`]
   const visited = new Set()
-  const structure = {}
+  const structure:{ [key: string]: string[] } = {}
   const items = []
+
+  const storeNodeGraphAsFile = async (result: object) => {
+    const filePath = `data/${category}/nodeGraph.json`
+    // Convert JSON data to a string
+    const jsonString = JSON.stringify(result)
+
+    // Create the necessary directories if they don't exist
+    const dirname = path.dirname(filePath)
+
+    try {
+      await fs.promises.mkdir(dirname, { recursive: true });
+      await fs.promises.writeFile(filePath, jsonString);
+      console.log('Save Node Graph Data!')
+    } catch (err) {
+        console.error(`Error: ${err}`);
+    }
+  }
 
   crawl(queue, visited as Set<string>, domain)
     .then((structure) => {
-      console.log(structure)
       // storeSearchBarAsFile({"items": items})
       storeNodeGraphAsFile(desiredFormat(structure as object))
     })
@@ -39,12 +55,9 @@ export const create = async (req: Request, res: Response, next: NextFunction) =>
           const page = await browser.newPage()
           await page.goto(url, { waitUntil: 'networkidle2' })
           const html = await page.content()
-          const structure: { [key: string]: string[] } = {}; // Add index signature to the structure object
 
-          console.log(structure)
           // Rest of the code remains the same
           const $ = cheerio.load(html);
-          console.log($)
           getArticleContent($, url);
 
           $('a').each((i, link) => {
@@ -82,35 +95,14 @@ export const create = async (req: Request, res: Response, next: NextFunction) =>
   //   // Create the necessary directories if they don't exist
   //   const dirname = path.dirname(filePath)
 
-  //   if (!fs.existsSync(dirname)) {
-  //     fs.mkdir(dirname, { recursive: true })
-  //   }
+    // if (!fs.existsSync(dirname)) {
+    //   fs.mkdir(dirname, { recursive: true })
+    // }
 
   //   // Write the JSON data to a file
   //   fs.writeFileSync(filePath, jsonString)
   //   console.log('Save Search Bar Data!')
   // }
-
-  function storeNodeGraphAsFile(result: object) {
-    const filePath = `data/${category}/nodeGraph.json`
-    // Convert JSON data to a string
-    const jsonString = JSON.stringify(result)
-  
-    // Create the necessary directories if they don't exist
-    const dirname = path.dirname(filePath)
-
-    if (!fs.existsSync(dirname)) {
-      fs.mkdir(dirname, function (err) {
-        if (err) throw err
-      })
-    }
-
-    // Write the JSON data to a file
-    fs.writeFile(filePath, jsonString, function (err) {
-      if (err) throw err
-    })
-    console.log('Save Node Graph Data!')
-  }
   
   function desiredFormat(structure: object) {
     let nodes: { id: number, name: string, url: string, group: any }[]
@@ -141,9 +133,6 @@ export const create = async (req: Request, res: Response, next: NextFunction) =>
         }
       })
     }).flat().filter(obj => obj !== undefined)
-
-    console.log(nodes)
-    console.log(links)
 
     return { nodes: nodes, links: links }
   
