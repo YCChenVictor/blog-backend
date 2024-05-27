@@ -1,4 +1,4 @@
-const Stack = require('../../stack/examples/stack.js')
+const Stack = require('../../stack/examples/stack.js');
   
 class QueueViaStacks { // FIFO
   constructor() {
@@ -8,16 +8,16 @@ class QueueViaStacks { // FIFO
   }
 
   enqueue(element) {
-    this.length += 1
+    this.length += 1;
     this.stackOne.push(element);
   }
 
   dequeue() {
     for (let i = 0; i < this.length; i++) {
-      this.stackTwo.push(this.stackOne.pop())
+      this.stackTwo.push(this.stackOne.pop());
     }
-    return this.stackTwo.pop()
+    return this.stackTwo.pop();
   }
 }
 
-module.exports = QueueViaStacks
+module.exports = QueueViaStacks;

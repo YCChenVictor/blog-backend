@@ -1,8 +1,8 @@
-const BinaryTree = require('../main')
-const validateBST = require('../examples/validate-bst')
+const BinaryTree = require('../main');
+const validateBST = require('../examples/validate-bst');
 
 describe('validate BST', () => {
-  let tree = new BinaryTree()
+  const tree = new BinaryTree();
   test('BST', () => {
     //     10
     //    /  \
@@ -17,6 +17,6 @@ describe('validate BST', () => {
     tree.addNode(12);
     tree.addNode(17);
 
-    expect(validateBST(tree.root)).toEqual(true)
-  })
-})
+    expect(validateBST(tree.root)).toEqual(true);
+  });
+});

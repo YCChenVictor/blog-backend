@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 
 const articleList = 'http://localhost:4000/blog/category';
-const domain = 'http://localhost:4000'
+const domain = 'http://localhost:4000';
 const items = [];
 
 // I am going to use DFS concept to solve this graph like problem. Start from a single webpage: https://ycchenvictor.github.io/blog/
@@ -55,6 +55,6 @@ function crawl() {
 
 // currently, just store the result as a JSON file in frontend.
 crawl().then((structure) => {
-  console.log(structure)
-  storeAsFile(structure)
-})
+  console.log(structure);
+  storeAsFile(structure);
+});

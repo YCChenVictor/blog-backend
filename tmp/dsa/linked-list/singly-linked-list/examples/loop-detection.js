@@ -1,20 +1,20 @@
 function loopDetection(linkedList) {
-  const hash = {}
-  let currentNode = linkedList.head
+  const hash = {};
+  let currentNode = linkedList.head;
 
   while(currentNode) {
     if(!hash[currentNode.value]) {
-      hash[currentNode.value] = [currentNode]
+      hash[currentNode.value] = [currentNode];
     } else if(hash[currentNode.value]) {
       if(hash[currentNode.value].includes(currentNode)) {
-        return currentNode.value
+        return currentNode.value;
       }
     }
 
-    currentNode = currentNode.next
+    currentNode = currentNode.next;
   }
   
-  return false
+  return false;
 }
 
-module.exports = loopDetection
+module.exports = loopDetection;

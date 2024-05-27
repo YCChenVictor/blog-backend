@@ -19,29 +19,29 @@ describe('Stack', () => {
     test('#pop', () => {
       expect(testStack.pop()).toEqual(33);
       expect(testStack.print()).toEqual([ 1, 74, 888, 62 ]);
-    })
+    });
 
     test('#peek', () => {
       expect(testStack.peek()).toEqual(33);
-    })
+    });
 
     test('#isEmpty', () => {
       expect(testStack.isEmpty()).toEqual(false);
-    })
+    });
 
     test('#size', () => {
       expect(testStack.size()).toEqual(testStack.items.length);
-    })
-  })
+    });
+  });
 
   describe('no item', () => {
-    let testStack = new Stack();
+    const testStack = new Stack();
     test('#pop', () => {
       expect(testStack.pop()).toEqual("Underflow");
-    })
+    });
 
     test('#isEmpty', () => {
       expect(testStack.isEmpty()).toEqual(true);
-    })
-  })
+    });
+  });
 });

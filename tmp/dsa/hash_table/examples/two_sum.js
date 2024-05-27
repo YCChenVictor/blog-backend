@@ -1,13 +1,13 @@
 function twoSum (array, target) {
-  const hash = {}
+  const hash = {};
   for (i = 0; i < array.length; i++) {
     if (hash[array[i]] !== undefined) {
-      return [hash[array[i]], i]
+      return [hash[array[i]], i];
     } else {
-      hash[target - array[i]] = i
+      hash[target - array[i]] = i;
     }
   }
-  return 'no'
+  return 'no';
 }
 
-module.exports = twoSum
+module.exports = twoSum;

@@ -20,7 +20,7 @@ const userAPIs = (app) => {
         password,
       });
 
-      console.log(newUser)
+      console.log(newUser);
 
       const payload = {
         email: email,

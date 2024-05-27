@@ -10,7 +10,7 @@ describe('deleteMiddleNode', () => {
     for(let i = 0; i < values.length; i++){
       testLinkedList.prepand(values[i]); // 3 <- 8 <- 4 <- 7 <- 2 <- 3 <- 6 <- 4 <- 1
     }
-    const result = deleteMiddleNode(testLinkedList)
+    const result = deleteMiddleNode(testLinkedList);
     expect(result.printList()).toEqual([3, 8, 4, 7, 3, 6, 4, 1]);
   });
 
@@ -20,7 +20,7 @@ describe('deleteMiddleNode', () => {
     for(let i = 0; i < values.length; i++){
       testLinkedList.prepand(values[i]);
     }
-    const result = deleteMiddleNode(testLinkedList)
+    const result = deleteMiddleNode(testLinkedList);
     expect(result.printList()).toEqual([8, 4, 7, 3, 6, 4, 1]);
   });
 });

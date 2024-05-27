@@ -1,4 +1,4 @@
-Node = require('./binary_tree_node.js')
+Node = require('./binary_tree_node.js');
 
 class MinimalTree {
   constructor() {
@@ -11,10 +11,10 @@ class MinimalTree {
       return;
     }
     
-    let queue = [this.root];
+    const queue = [this.root];
     
     while (queue.length > 0) {
-      let currentNode = queue.shift();
+      const currentNode = queue.shift();
     
       if (currentNode.left === null) {
         currentNode.left = new Node(value);
@@ -30,14 +30,14 @@ class MinimalTree {
   }
 
   height() {
-    let result = 0
-    let currentNode = this.root
+    let result = 0;
+    let currentNode = this.root;
     while(currentNode) {
-      result += 1
-      currentNode = currentNode.left
+      result += 1;
+      currentNode = currentNode.left;
     }
-    return result
+    return result;
   }
 }
   
-module.exports = MinimalTree
+module.exports = MinimalTree;

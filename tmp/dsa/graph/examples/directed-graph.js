@@ -3,21 +3,21 @@ class DirectedGraph {
   // Directed edges
   // No attributes on edges and nodes
   constructor() {
-    this.adjacencyList = {}
+    this.adjacencyList = {};
   }
   
   // create
   addVertex(vertex) {
-    this.adjacencyList[vertex] = []
+    this.adjacencyList[vertex] = [];
   }
 
   addEdge(vertex1, vertex2) {
-    this.adjacencyList[vertex1].push(vertex2)
+    this.adjacencyList[vertex1].push(vertex2);
   }
 
   // read
   getNeighbors(vertex) {
-    return this.adjacencyList[vertex]
+    return this.adjacencyList[vertex];
   }
 
 //   getVertices() {
@@ -33,12 +33,12 @@ class DirectedGraph {
 //   }
   
   findVertex(vertex) {
-    const vertices = Object.keys(this.adjacencyList)
-    return vertices.indexOf(vertex) !== -1
+    const vertices = Object.keys(this.adjacencyList);
+    return vertices.indexOf(vertex) !== -1;
   }
   
   findEdge(vertex1, vertex2) {
-    return this.adjacencyList[vertex1.toString()].includes(vertex2)
+    return this.adjacencyList[vertex1.toString()].includes(vertex2);
   }
   
   // update
@@ -66,5 +66,5 @@ class DirectedGraph {
 //   }
 }
   
-module.exports = DirectedGraph
+module.exports = DirectedGraph;
   

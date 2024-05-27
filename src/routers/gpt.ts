@@ -1,5 +1,5 @@
 // import passport from '../middleware/passport';
-import { OpenAI } from "openai";
+import { OpenAI } from 'openai';
 import { Request, Response } from 'express';
 
 // const gptApis = (app: any) => {

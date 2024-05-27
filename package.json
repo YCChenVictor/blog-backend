@@ -8,7 +8,7 @@
     "test": "NODE_ENV=test jest",
     "dev": "NODE_ENV=dev yarn start",
     "start": "yarn compile && node dist/server.js --experimental-modules",
-    "eslint:fix": "eslint --fix",
+    "eslint:fix": "eslint --debug --fix .",
     "compile": "tsc && tsc-alias",
     "debug": "nodemon --inspect-brk server.js"
   },

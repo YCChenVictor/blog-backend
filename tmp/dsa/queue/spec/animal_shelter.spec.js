@@ -1,4 +1,4 @@
-const AnimalShelter = require('../examples/animal_shelter.js')
+const AnimalShelter = require('../examples/animal_shelter.js');
 
 describe('AnimalShelter', () => {
   beforeEach(() => {
@@ -17,21 +17,21 @@ describe('AnimalShelter', () => {
   });
 
   test('#enqueue', () => {
-    expect(testAnimalShelter.printList()).toEqual(['d1', 'd2', 'c1', 'c2', 'd3', 'c3'])
+    expect(testAnimalShelter.printList()).toEqual(['d1', 'd2', 'c1', 'c2', 'd3', 'c3']);
   });
 
   test('#dequeueAny', () => {
-    testAnimalShelter.dequeueAny()
-    expect(testAnimalShelter.printList()).toEqual(['d2', 'c1', 'c2', 'd3', 'c3'])
-  })
+    testAnimalShelter.dequeueAny();
+    expect(testAnimalShelter.printList()).toEqual(['d2', 'c1', 'c2', 'd3', 'c3']);
+  });
   
   test('#dequeueCat', () => {
-    testAnimalShelter.dequeueCat()
-    expect(testAnimalShelter.printList()).toEqual(['d1', 'd2', 'c2', 'd3', 'c3'])
-  })
+    testAnimalShelter.dequeueCat();
+    expect(testAnimalShelter.printList()).toEqual(['d1', 'd2', 'c2', 'd3', 'c3']);
+  });
 
   test('#dequeueDog', () => {
-    testAnimalShelter.dequeueDog()
-    expect(testAnimalShelter.printList()).toEqual(['d2', 'c1', 'c2', 'd3', 'c3'])
-  })
+    testAnimalShelter.dequeueDog();
+    expect(testAnimalShelter.printList()).toEqual(['d2', 'c1', 'c2', 'd3', 'c3']);
+  });
 });

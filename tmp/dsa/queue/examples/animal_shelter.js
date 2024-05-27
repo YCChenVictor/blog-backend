@@ -13,70 +13,70 @@ class AnimalShelter {
 
   enqueue(value, type) {
     if(this.head === null) {
-      this.head = new Node(value, type)
+      this.head = new Node(value, type);
     } else {
-      const lastNode = this.traverseToLast()
-      lastNode.next = new Node(value, type)
+      const lastNode = this.traverseToLast();
+      lastNode.next = new Node(value, type);
     }
   }
 
   dequeueAny() {
-    this.head = this.head.next
+    this.head = this.head.next;
   }
 
   dequeueDog() {
-    let currentNode = this.head
-    let preNode
+    let currentNode = this.head;
+    let preNode;
 
     if(currentNode.type === 'dog') {
-      this.head = this.head.next
-      return currentNode
+      this.head = this.head.next;
+      return currentNode;
     }
 
     while(currentNode.type !== 'dog') {
-      preNode = currentNode
-      currentNode = currentNode.next
+      preNode = currentNode;
+      currentNode = currentNode.next;
     }
 
-    preNode.next = currentNode.next
+    preNode.next = currentNode.next;
 
-    return currentNode
+    return currentNode;
   }
 
   dequeueCat() {
-    let currentNode = this.head
-    let preNode
+    let currentNode = this.head;
+    let preNode;
       
     if(currentNode.type === 'cat') {
-      this.head = this.head.next
-      return currentNode
+      this.head = this.head.next;
+      return currentNode;
     }
 
     while(currentNode.type !== 'cat') {
-      preNode = currentNode
-      currentNode = currentNode.next
+      preNode = currentNode;
+      currentNode = currentNode.next;
     }
 
-    preNode.next = currentNode.next
+    preNode.next = currentNode.next;
 
-    return currentNode
+    return currentNode;
   }
 
   dequeueAny() {
-    this.head = this.head.next
-    return this.head
+    this.head = this.head.next;
+    return this.head;
   }
 
   printList() {
-    const result = []
-    let currentNode = this.head
+    const result = [];
+    let currentNode = this.head;
 
     while(currentNode) {
-      result.push(currentNode.value)
-      currentNode = currentNode.next
+      result.push(currentNode.value);
+      currentNode = currentNode.next;
     }
 
-    return result
+    return result;
   }
 
   traverseToLast() {
@@ -86,11 +86,11 @@ class AnimalShelter {
       if (currentNode.next !== null) {
         currentNode = currentNode.next;
       } else {
-        return currentNode
+        return currentNode;
       }
     }
-    return currentNode
+    return currentNode;
   }
 }
 
-module.exports = AnimalShelter
+module.exports = AnimalShelter;

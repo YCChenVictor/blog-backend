@@ -1,10 +1,10 @@
-const buildOrder = require('../examples/build-order.js')
+const buildOrder = require('../examples/build-order.js');
 
 describe('build order', () => {
-  let projects = ['a', 'b', 'c', 'd', 'e', 'f']
-  let dependencies = [['a', 'd'], ['f', 'b'], ['b', 'd'], ['f', 'a'], ['d', 'c']]
+  const projects = ['a', 'b', 'c', 'd', 'e', 'f'];
+  const dependencies = [['a', 'd'], ['f', 'b'], ['b', 'd'], ['f', 'a'], ['d', 'c']];
 
   test('#', () => {
-    expect(buildOrder(projects, dependencies)).toEqual(['f', 'b', 'a', 'd', 'c', 'e'])
-  })
-})
+    expect(buildOrder(projects, dependencies)).toEqual(['f', 'b', 'a', 'd', 'c', 'e']);
+  });
+});

@@ -43,7 +43,7 @@ class DoublyLinkedList {
       this.head = newNode;
       this.tail = newNode;
     } else if (position > this.length) {
-      this.append(data)
+      this.append(data);
     } else {
       const nodeOnPosition = this.traverseToIndex(position - 1);
       newNode.next = nodeOnPosition;
@@ -63,7 +63,7 @@ class DoublyLinkedList {
       result.push(current_node.data);
       current_node = current_node.next;
     }
-    return result
+    return result;
   }
 
   reverseValues() { // return values from tail
@@ -73,7 +73,7 @@ class DoublyLinkedList {
       result.push(current_node.data);
       current_node = current_node.prev;
     }
-    return result
+    return result;
   }
 
   // traverse
@@ -124,4 +124,4 @@ class DoublyLinkedList {
   }
 }
 
-module.exports = DoublyLinkedList
+module.exports = DoublyLinkedList;

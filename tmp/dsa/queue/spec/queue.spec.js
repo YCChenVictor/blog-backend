@@ -11,8 +11,8 @@ describe('Queue', () => {
   });
 
   test('#init', () => {
-    expect(testQueue.print()).toEqual([1, 74, 888, 62, 33])
-  })
+    expect(testQueue.print()).toEqual([1, 74, 888, 62, 33]);
+  });
 
   test('#enqueue', () => {
     testQueue.enqueue(0);
@@ -22,7 +22,7 @@ describe('Queue', () => {
   test('#dequeue', () => { // first in is 1
     testQueue.dequeue();
     expect(testQueue.print()).toEqual([74, 888, 62, 33]);
-  })
+  });
 
   test('#peek', () => {
     expect(testQueue.peek()).toEqual(1);
@@ -30,9 +30,9 @@ describe('Queue', () => {
 
   test('#isEmpty', () => {
     expect(testQueue.isEmpty()).toEqual(false);
-  })
+  });
 
   test('#size', () => {
     expect(testQueue.size()).toEqual(5);
-  })
+  });
 });

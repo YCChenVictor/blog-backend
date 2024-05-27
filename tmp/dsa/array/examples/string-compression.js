@@ -14,4 +14,4 @@ function stringCompression(string) {
   return compressed.length < string.length ? compressed : string;
 }
 
-module.exports = stringCompression
+module.exports = stringCompression;

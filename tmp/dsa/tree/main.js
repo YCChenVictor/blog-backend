@@ -4,23 +4,23 @@ class BinaryTreeNode {
     this.value = value;
     this.parent = parent;
     this.left = null;
-    this.right = null
+    this.right = null;
   }
 }
 
 class BinaryTree {
   constructor() {
-    this.root = null
-    this.queue = []
-    this.currentParentNode = this.root
+    this.root = null;
+    this.queue = [];
+    this.currentParentNode = this.root;
   }
 
   addNode(value) { // will use recursive
     if (this.root === null) {
-      this.root = new BinaryTreeNode(value)
-      this.currentParentNode = this.root
+      this.root = new BinaryTreeNode(value);
+      this.currentParentNode = this.root;
     } else {
-      this.insertNode(this.currentParentNode, new BinaryTreeNode(value)) // It add BinaryTreeNode but not BinaryTree
+      this.insertNode(this.currentParentNode, new BinaryTreeNode(value)); // It add BinaryTreeNode but not BinaryTree
     }
   }
 
@@ -46,14 +46,14 @@ class BinaryTree {
 
     function traverse(node) {
       if (node) {
-        result.push(node.value)
+        result.push(node.value);
         traverse(node.left);
         traverse(node.right);
       }
     }
 
     traverse(this.root);
-    return result
+    return result;
   }
 
   postorderTraversal() { // L > R > V
@@ -63,54 +63,54 @@ class BinaryTree {
       if (node) {
         traverse(node.left);
         traverse(node.right);
-        result.push(node.value)
+        result.push(node.value);
       }
     }
 
     traverse(this.root);
-    return result
+    return result;
   }
   
   levelorderTraversal() { // [5, 3, 8, 2, 4, 7, 9]
-    const queue = [this.root]
-    const result = []
+    const queue = [this.root];
+    const result = [];
 
     if (!this.root) {
-      return
+      return;
     }
 
     while (queue.length > 0) {
-      const node = queue.shift()
-      result.push(node.value)
+      const node = queue.shift();
+      result.push(node.value);
 
       if (node.left !== null) {
-        queue.push(node.left)
+        queue.push(node.left);
       }
       if (node.right !== null) {
-        queue.push(node.right)
+        queue.push(node.right);
       }
     }
 
-    return result
+    return result;
   }
 
   insertNode(parentNode, newNode) {
-    this.currentParentNode = parentNode
+    this.currentParentNode = parentNode;
     if(this.currentParentNode.left === null) {
-      this.currentParentNode.left = newNode
-      this.queue.push(newNode)
+      this.currentParentNode.left = newNode;
+      this.queue.push(newNode);
     } else if(this.currentParentNode.right === null) {
-      this.currentParentNode.right = newNode
-      this.queue.push(newNode)
+      this.currentParentNode.right = newNode;
+      this.queue.push(newNode);
     } else {
       if(this.currentParentNode.left === null || this.currentParentNode.right === null) {
-        this.insertNode(this.currentParentNode, newNode)
+        this.insertNode(this.currentParentNode, newNode);
       } else {
-        this.currentParentNode = this.queue.shift()
-        this.insertNode(this.currentParentNode, newNode)
+        this.currentParentNode = this.queue.shift();
+        this.insertNode(this.currentParentNode, newNode);
       }
     }
   }
 }
 
-module.exports = BinaryTree
+module.exports = BinaryTree;

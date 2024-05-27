@@ -7,7 +7,7 @@ class StackMin {
   push(element) {
     this.items.push(element);
     if (element < this.minValue || this.minValue === null) {
-      this.minValue = element
+      this.minValue = element;
     }
   }
   

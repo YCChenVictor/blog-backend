@@ -9,9 +9,9 @@ function deleteMiddleNode(linkedList) {
   }
 
   while (fast && fast.next && fast.next.next) {
-    fast = fast.next.next
-    preNode = slow
-    slow = slow.next
+    fast = fast.next.next;
+    preNode = slow;
+    slow = slow.next;
   }
   preNode.next = slow.next;
 

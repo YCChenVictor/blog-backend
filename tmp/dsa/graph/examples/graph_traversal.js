@@ -1,14 +1,14 @@
-const Graph = require('./graph.js')
+const Graph = require('./graph.js');
 
 class GraphTraversal extends Graph {
   depthFirstSearch(vertex, visited = new Set()) {
     visited.add(vertex);
     this.getNeighbors(vertex).forEach(neighbor => {
       if(!visited.has(neighbor)) {
-        this.depthFirstSearch(neighbor, visited)
+        this.depthFirstSearch(neighbor, visited);
       }
-    })
-    return visited
+    });
+    return visited;
   }
     
   breadthFirstSearch(startingVertex) {
@@ -19,7 +19,7 @@ class GraphTraversal extends Graph {
       const currentVertex = queue.shift();
       const neighbors = this.getNeighbors(currentVertex);
   
-      for (let neighbor of neighbors) {
+      for (const neighbor of neighbors) {
         if (!visited.has(neighbor)) {
           visited.add(neighbor);
           queue.push(neighbor);

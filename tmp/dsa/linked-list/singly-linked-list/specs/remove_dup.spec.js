@@ -12,7 +12,7 @@ describe('RemoveDup', () => {
   });
 
   test('#', () => {
-    const result = removeDup(testLinkedList)
+    const result = removeDup(testLinkedList);
     expect(result).toEqual([1, 4, 6, 3, 2, 7, 8]);
   });
 });

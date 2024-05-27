@@ -12,7 +12,7 @@ describe('Partition', () => {
   });
 
   test('#', () => {
-    const result = partition(testLinkedList, 5)
+    const result = partition(testLinkedList, 5);
     expect(result.printList()).toEqual([1, 4, 3, 2, 4, 3, 6, 7, 8]);
   });
 });

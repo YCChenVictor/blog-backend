@@ -1,5 +1,5 @@
 function validateBST(node, min, max) {
-  console.log(node)
+  console.log(node);
   if (node === null) {
     return true; // An empty tree is a valid BST.
   }
@@ -15,4 +15,4 @@ function validateBST(node, min, max) {
   );
 }
 
-module.exports = validateBST
+module.exports = validateBST;

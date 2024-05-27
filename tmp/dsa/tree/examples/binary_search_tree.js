@@ -1,5 +1,5 @@
-BinaryTree = require('../main.js')
-Node = require('./binary_tree_node.js')
+BinaryTree = require('../main.js');
+Node = require('./binary_tree_node.js');
 
 class BinarySearchTree extends BinaryTree {
   constructor(root) {
@@ -8,9 +8,9 @@ class BinarySearchTree extends BinaryTree {
 
   addNode(value) { // will use recursive
     if (this.root === null) {
-      this.root = new Node(value)
+      this.root = new Node(value);
     } else {
-      this.insertNode(this.root, new Node(value))
+      this.insertNode(this.root, new Node(value));
     }
   }
 
@@ -47,4 +47,4 @@ class BinarySearchTree extends BinaryTree {
   }
 }
 
-module.exports = BinarySearchTree
+module.exports = BinarySearchTree;

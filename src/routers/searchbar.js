@@ -1,8 +1,8 @@
-const puppeteer = require('puppeteer')
-const cheerio = require('cheerio')
-const randomColor = require('randomcolor')
-const path = require('path')
-const fs = require('fs')
+const puppeteer = require('puppeteer');
+const cheerio = require('cheerio');
+const randomColor = require('randomcolor');
+const path = require('path');
+const fs = require('fs');
 
 const searchbar = (app) => {
   app.get('/searchbar', async () => {
@@ -40,7 +40,7 @@ const searchbar = (app) => {
           }
         });
       });
-    }
+    };
 
     storeAsFile = (result) => {
       // Convert JSON data to a string
@@ -51,12 +51,12 @@ const searchbar = (app) => {
         if (err) throw err;
         console.log('Saved!');
       });
-    }
+    };
 
     crawl().then((structure) => {
-      storeAsFile(structure)
-    })
-  })
+      storeAsFile(structure);
+    });
+  });
 };
 
 module.exports = searchbar;

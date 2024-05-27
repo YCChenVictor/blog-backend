@@ -14,16 +14,16 @@
 
 // order 2
 function main() {
-  test()
-  bark()
+  test();
+  bark();
 }
 
 const test = () => {
-  console.log('test')
-}
+  console.log('test');
+};
 
 const bark = () => {
-  console.log('bark')
-}
+  console.log('bark');
+};
 
-main()
+main();

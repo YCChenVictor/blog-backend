@@ -12,7 +12,7 @@ export const create = async (req: Request, res: Response, next: NextFunction) =>
   const domain = 'http://localhost:3000'
   const queue = [`http://localhost:3000/blog/${category}/main`]
   const visited = new Set()
-  const structure:{ [key: string]: string[] } = {}
+  const structure:Record<string, string[]> = {}
   const items = []
 
   const storeNodeGraphAsFile = async (result: object) => {
@@ -25,10 +25,10 @@ export const create = async (req: Request, res: Response, next: NextFunction) =>
 
     try {
       await fs.promises.mkdir(dirname, { recursive: true });
-      await fs.promises.writeFile(filePath, jsonString);
+      await fs.promises.writeFile(filePath, jsonString)
       console.log('Save Node Graph Data!')
     } catch (err) {
-        console.error(`Error: ${err}`);
+        console.error(`Error: ${err}`)
     }
   }
 
@@ -43,7 +43,7 @@ export const create = async (req: Request, res: Response, next: NextFunction) =>
 
   function crawl(queue: string[], visited: Set<string>, domain: string) { // Promise in this function
     const childNodes: string[] = []
-    let url = queue.shift()
+    const url = queue.shift()
     console.log(url)
     if (!url) {
       return Promise.resolve(structure) // resolve with returning the final structure
@@ -139,7 +139,7 @@ export const create = async (req: Request, res: Response, next: NextFunction) =>
     function getIdFromNodeName(url: string) {
       const result = nodes.find((node) => node.url === url)
       if(result) {
-        return result['id']
+        return result.id
       } else {
         null
       }

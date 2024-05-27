@@ -1,14 +1,14 @@
 function routeBetweenNodes (graph, start, end) {
   if (start === end) {
-    return true
+    return true;
   }
-  let nextNodes = graph.getNeighbors(start)
+  const nextNodes = graph.getNeighbors(start);
   for (let i = 0; i < nextNodes.length; i ++) {
     if (routeBetweenNodes(graph, nextNodes[i], end)) {
-      return true
+      return true;
     }
   }
-  return false
+  return false;
 }
 
-module.exports = routeBetweenNodes
+module.exports = routeBetweenNodes;

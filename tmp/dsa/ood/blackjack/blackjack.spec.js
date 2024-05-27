@@ -1,37 +1,37 @@
-BlackJack = require('./blackjack.js')
-Deck = require('./deck.js')
+BlackJack = require('./blackjack.js');
+Deck = require('./deck.js');
 
 describe('BlackJack', () => {
   describe('8, 11, 3, 6, 10, 1', () => {
-    let deck
-    let game
+    let deck;
+    let game;
     beforeEach(() => {
-      deck = new Deck([8, 11, 3, 6, 10, 1])
-      game = new BlackJack(deck)
+      deck = new Deck([8, 11, 3, 6, 10, 1]);
+      game = new BlackJack(deck);
       // Dealer: 11, 6
       // Player: 8, 3
-    })
+    });
 
     describe('Player hit', () => {
       test('should let dealer stand', () => {
-        expect(game.dealer.cards.length).toEqual(2)
-      })
+        expect(game.dealer.cards.length).toEqual(2);
+      });
  
       test('should announce player wins', () => {
-        expect(game.perform('hit')).toEqual('wins')
-      })
-    })
+        expect(game.perform('hit')).toEqual('wins');
+      });
+    });
 
     describe('Player stand', () => {
       test('should let dealer stand', () => {
-        expect(game.dealer.cards.length).toEqual(2)
-      })
+        expect(game.dealer.cards.length).toEqual(2);
+      });
 
       test('should announce player lose', () => {
-        expect(game.perform('stand')).toEqual('lose')
-      })
-    })
-  })
+        expect(game.perform('stand')).toEqual('lose');
+      });
+    });
+  });
 
 //   test('[9, 2, 7, 4, 11, 8]', () => {
 //     beforeEach(() => {
@@ -56,4 +56,4 @@ describe('BlackJack', () => {
 //       })
 //     })
 //   })
-})
+});

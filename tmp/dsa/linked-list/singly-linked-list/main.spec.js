@@ -27,19 +27,19 @@ describe('SinglyLinkedList', () => {
 
   test('#traverse', () => {
     expect(testLinkedList.traverseTo(2).value).toEqual(888);
-  })
+  });
 
   test('#printList', () => {
     expect(testLinkedList.printList()).toEqual([33, 62, 888, 74, 1]);
-  })
+  });
   
   test('#update', () => {
-    testLinkedList.update(3, 4)
+    testLinkedList.update(3, 4);
     expect(testLinkedList.printList()).toEqual([33, 62, 888, 4, 1]);
-  })
+  });
   
   test('#remove', () => {
-    testLinkedList.remove(3)
+    testLinkedList.remove(3);
     expect(testLinkedList.printList()).toEqual([33, 62, 888, 1]);
-  })
+  });
 });

@@ -1,16 +1,16 @@
 function charactersIsUnique(s) {
-  object = {}
+  object = {};
   if(typeof s != 'string') {
-    return 'wrong type'
+    return 'wrong type';
   }
   for (var i = 0; i < s.length; i++) {
     if(object.hasOwnProperty(s[i])) {
-      return false
+      return false;
     } else {
-      object[s[i]] = 1
+      object[s[i]] = 1;
     }
   }
-  return true
+  return true;
 }
 
 module.exports = charactersIsUnique;

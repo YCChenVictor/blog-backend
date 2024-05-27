@@ -30,10 +30,10 @@ describe('DoublyLinkedList', () => {
   test('#update', () => {
     testLinkedList.update(2, 1000);
     expect(testLinkedList.printList()).toEqual([ 33, 1000, 888, 74, 1 ]);
-  })
+  });
 
   test('#delete', () => {
     testLinkedList.update(2, 1000);
     expect(testLinkedList.printList()).toEqual([ 33, 1000, 888, 74, 1 ]);
-  })
+  });
 });

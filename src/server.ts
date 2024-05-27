@@ -1,5 +1,5 @@
-import nodeGraphRouter from './routers/nodeGraphRouter'
-import express from 'express'
+import nodeGraphRouter from './routers/nodeGraphRouter';
+import express from 'express';
 
 const app = express();
 
@@ -36,13 +36,13 @@ app.use('/node-graph', nodeGraphRouter);
 
 // start
 if (process.env.NODE_ENV === 'dev') {
-  const PORT = 5000
+  const PORT = 5000;
   app.listen(PORT, () => {
-    console.log('in development mode')
-    console.log(`now listening to ${PORT}`)
-  })
+    console.log('in development mode');
+    console.log(`now listening to ${PORT}`);
+  });
 } else {
   // TODO for production
 }
 
-export default app
+export default app;

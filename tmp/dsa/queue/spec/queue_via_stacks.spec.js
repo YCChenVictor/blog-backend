@@ -11,6 +11,6 @@ describe('QueueViaStacks', () => {
   });
 
   test('#FIFO', () => {
-    expect(testQueueViaStacks.dequeue()).toEqual(1)
-  })
+    expect(testQueueViaStacks.dequeue()).toEqual(1);
+  });
 });

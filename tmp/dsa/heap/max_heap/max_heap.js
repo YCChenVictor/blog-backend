@@ -5,44 +5,44 @@ class MaxHeap {
   
   // create
   insert(value) {
-    this.heap.unshift(value)
-    this.heapify()
+    this.heap.unshift(value);
+    this.heapify();
   }
 
   // read
   findMax() {
-    return this.heap[0]
+    return this.heap[0];
   }
 
   values() {
-    return this.heap
+    return this.heap;
   }
 
   // update
   update(value, index) {
-    this.heap[index] = value
-    this.heapify()
+    this.heap[index] = value;
+    this.heapify();
   }
 
   // destroy
   delete() {
     // In max heap, we usually remove the maximum value
-    this.heap.shift()
-    this.heapify()
+    this.heap.shift();
+    this.heapify();
   }
 
   heapify(i = 0) {
-    const leftChildIndex = i * 2 + 1
-    const rightChildIndex = i * 2 + 2
+    const leftChildIndex = i * 2 + 1;
+    const rightChildIndex = i * 2 + 2;
 
-    if (i > this.heap.length) return
+    if (i > this.heap.length) return;
 
-    let largest = i
+    let largest = i;
     if (leftChildIndex < this.heap.length && this.heap[leftChildIndex] > this.heap[largest]) {
-      largest = leftChildIndex
+      largest = leftChildIndex;
     }
     if (rightChildIndex < this.heap.length && this.heap[rightChildIndex] > this.heap[largest]) {
-      largest = rightChildIndex
+      largest = rightChildIndex;
     }
 
     if (largest !== i) {
@@ -58,4 +58,4 @@ class MaxHeap {
   }
 }
 
-module.exports = MaxHeap
+module.exports = MaxHeap;

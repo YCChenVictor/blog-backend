@@ -24,10 +24,10 @@ class LinkedList {
 
   prependNode(node) {
     if (!this.head) {
-      this.head = node
+      this.head = node;
     } else {
-      node.next = this.head
-      this.head = node
+      node.next = this.head;
+      this.head = node;
     }
   }
 
@@ -37,7 +37,7 @@ class LinkedList {
     if (!this.head) {
       this.head = newNode;
     } else {
-      let tail = this.traverseTo(this.size() - 1);
+      const tail = this.traverseTo(this.size() - 1);
       tail.next = newNode;
     }
   }
@@ -84,15 +84,15 @@ class LinkedList {
   }
 
   printList() {
-    const list = []
-    let currentNode = this.head
+    const list = [];
+    let currentNode = this.head;
 
     while (currentNode !== null && currentNode !== undefined) {
-      list.push(currentNode.value)
-      currentNode = currentNode.next
+      list.push(currentNode.value);
+      currentNode = currentNode.next;
     }
 
-    return list
+    return list;
   }
 
   // Update
@@ -122,4 +122,4 @@ class LinkedList {
   }
 }
 
-module.exports = { Node, LinkedList }
+module.exports = { Node, LinkedList };
