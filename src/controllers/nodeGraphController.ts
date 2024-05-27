@@ -3,8 +3,9 @@ import cheerio from 'cheerio'
 import path from 'path'
 import fs from 'fs'
 import randomColor from 'randomcolor'
+import { Request, Response, NextFunction } from 'express'
 
-export const handlePostRequest = async () => {
+export const create = async (req: Request, res: Response, next: NextFunction) => {
   // I am going to use DFS concept to solve this graph like problem.
   // const { category } = req.query
   const category = 'software' // remove this line after testing
@@ -14,11 +15,11 @@ export const handlePostRequest = async () => {
   const structure = {}
   const items = []
 
-  crawl(queue, visited, domain)
+  crawl(queue, visited as Set<string>, domain)
     .then((structure) => {
       console.log(structure)
       // storeSearchBarAsFile({"items": items})
-      storeNodeGraphAsFile(desiredFormat(structure))
+      storeNodeGraphAsFile(desiredFormat(structure as object))
     })
     .catch((error) => {
       console.error('Error occurred during crawling:', error);
@@ -36,24 +37,28 @@ export const handlePostRequest = async () => {
         return new Promise(async (resolve, reject) => {
           const browser = await puppeteer.launch()
           const page = await browser.newPage()
-
           await page.goto(url, { waitUntil: 'networkidle2' })
           const html = await page.content()
-          const $ = cheerio.load(html)
+          const structure: { [key: string]: string[] } = {}; // Add index signature to the structure object
 
-          getArticleContent($, url)
+          console.log(structure)
+          // Rest of the code remains the same
+          const $ = cheerio.load(html);
+          console.log($)
+          getArticleContent($, url);
 
           $('a').each((i, link) => {
-            const href = $(link).attr('href')
+            const href = $(link).attr('href');
             if (href && href.startsWith('/blog/') && !href.includes('#')) {
-              const absoluteUrl = domain + href
-              childNodes.push(href)
-              queue.push(absoluteUrl)
+              const absoluteUrl = domain + href;
+              childNodes.push(href);
+              queue.push(absoluteUrl);
             }
-          })
-          const parentNode = url.replace(domain, "")
-          structure[parentNode] = childNodes
-          resolve(crawl(queue, visited, domain)) // resolve with calling this function again
+          });
+
+          const parentNode = url.replace(domain, "");
+          structure[parentNode] = childNodes;
+          resolve(crawl(queue, visited, domain)); // resolve with calling this function again
         })
       } else {
         return crawl(queue, visited, domain)
@@ -61,7 +66,7 @@ export const handlePostRequest = async () => {
     }
   }
 
-  function getArticleContent($, url) {
+  function getArticleContent($: cheerio.Root, url: string) {
     const baseUrl = 'http://localhost:3000' // should be changed in the future according to environment variable
     const title = $('h1').text()
     const content = $('#article').text().replace(/(\r\n|\n|\r)/gm, "").replace(/ +(?= )/g,'')
@@ -86,7 +91,7 @@ export const handlePostRequest = async () => {
   //   console.log('Save Search Bar Data!')
   // }
 
-  function storeNodeGraphAsFile(result) {
+  function storeNodeGraphAsFile(result: object) {
     const filePath = `data/${category}/nodeGraph.json`
     // Convert JSON data to a string
     const jsonString = JSON.stringify(result)
@@ -95,7 +100,9 @@ export const handlePostRequest = async () => {
     const dirname = path.dirname(filePath)
 
     if (!fs.existsSync(dirname)) {
-      fs.mkdir(dirname, { recursive: true })
+      fs.mkdir(dirname, function (err) {
+        if (err) throw err
+      })
     }
 
     // Write the JSON data to a file
@@ -105,8 +112,12 @@ export const handlePostRequest = async () => {
     console.log('Save Node Graph Data!')
   }
   
-  function desiredFormat(structure) {
-    let nodes
+  function desiredFormat(structure: object) {
+    let nodes: { id: number, name: string, url: string, group: any }[]
+    function getGroupFrom(value: string) {
+      // Add your implementation here
+    }
+
     let links
     nodes = Object.keys(structure).map((value, index) => {
       let name = value.split('/').slice(-1)[0]
@@ -122,7 +133,7 @@ export const handlePostRequest = async () => {
     })
     nodes = giveColorByGroupTo(nodes)
     links = Object.entries(structure).map(([key, value]) => {
-      return value.map((item) => {
+      return value.map((item: string) => { // Explicitly specify the type of 'item' as string
         const source = getIdFromNodeName(key)
         const target = getIdFromNodeName(item)
         if(source && target) {
@@ -136,7 +147,7 @@ export const handlePostRequest = async () => {
 
     return { nodes: nodes, links: links }
   
-    function getIdFromNodeName(url) {
+    function getIdFromNodeName(url: string) {
       const result = nodes.find((node) => node.url === url)
       if(result) {
         return result['id']
@@ -145,11 +156,7 @@ export const handlePostRequest = async () => {
       }
     }
   
-    function getGroupFrom(url) {
-      return url.split("/")[3]
-    }
-  
-    function giveColorByGroupTo(nodes) {
+    function giveColorByGroupTo(nodes: { id: number, name: string, url: string, group: any, color?: string }[]) {
       const groups = [...new Set(nodes.map(node => node.group))]
       const colors = randomColor({ count: groups.length })
       nodes.map((node) => {

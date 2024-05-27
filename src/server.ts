@@ -1,6 +1,11 @@
-// init
+import nodeGraphRouter from './routers/nodeGraphRouter'
 import express from 'express'
-const app = express()
+
+const app = express();
+
+// node graph
+app.use('/node-graph', nodeGraphRouter);
+
 
 // console.log('sss')
 
@@ -28,14 +33,9 @@ const app = express()
 // import cors from './middleware/cors.js'
 // app.use(cors)
 
-// // API
-// // import api from './routers/summary.js'
-// // api(app)
-// import nodeGraphRouter from './routers/nodeGraphRouter.js'
-// app.use('/', nodeGraphRouter);
 
 // start
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'dev') {
   const PORT = 5000
   app.listen(PORT, () => {
     console.log('in development mode')

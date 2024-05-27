@@ -6,7 +6,10 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test jest",
-    "dev": "NODE_ENV=development nodemon --exec 'node --inspect --loader ts-node/esm' src/server.ts",
+    "dev": "NODE_ENV=dev yarn start",
+    "start": "yarn compile && node dist/server.js --experimental-modules",
+    "eslint:fix": "eslint --fix",
+    "compile": "tsc && tsc-alias",
     "debug": "nodemon --inspect-brk server.js"
   },
   "keywords": [],
@@ -21,7 +24,7 @@
     "express-session": "^1.17.3",
     "googleapis": "^118.0.0",
     "jest": "^29.6.4",
-    "jsonwebtoken": "^9.0.0",
+    "jsonwebtoken": "^9.0.2",
     "openai": "^4.0.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
@@ -36,13 +39,18 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.3.0",
+    "@types/cheerio": "^0.22.35",
     "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/passport-jwt": "^4.0.1",
+    "@types/passport-local": "^1.0.38",
     "@types/randomcolor": "^0.5.9",
     "babel-register": "^6.26.0",
     "eslint": "9.x",
     "globals": "^15.3.0",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.10",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.10.0"
   }
