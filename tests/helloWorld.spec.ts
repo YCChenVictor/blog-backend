@@ -1,6 +1,6 @@
 const request = require('supertest');
-const app = require('../server.js');
-const apis = require('../apis/summary.js');
+const app = require('../server');
+const apis = require('../apis/summary');
 
 describe('HelloWorld', () => {
   let server;
