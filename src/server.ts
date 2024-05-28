@@ -1,11 +1,4 @@
-import nodeGraphRouter from './routers/nodeGraphRouter';
-import express from 'express';
-
-const app = express();
-
-// node graph
-app.use('/node-graph', nodeGraphRouter);
-
+import app from './app';
 
 // console.log('sss')
 

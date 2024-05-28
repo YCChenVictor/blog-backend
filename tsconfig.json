@@ -4,7 +4,6 @@
     "target": "esnext",
     "lib": ["esnext"],
     "module": "esnext",
-    "rootDir": "./src",
     "moduleResolution": "node",
     "outDir": "./dist",
     "esModuleInterop": true,
@@ -13,7 +12,8 @@
     "skipLibCheck": true
   },
   "include": [
-    "src"
+    "src",
+    "tests/**/*.ts",
   ],
   "exclude": [
     "node_modules",

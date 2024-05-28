@@ -1,3 +1,5 @@
+import tsParser from '@typescript-eslint/parser';
+
 // eslint.config.js
 export default [
   {
@@ -9,6 +11,9 @@ export default [
       "no-unused-vars": "error",
       "semi": "error",
       "prefer-const": "error"
+    },
+    languageOptions: {
+      parser: tsParser
     }
   }
 ];
