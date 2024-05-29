@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/chenyongzhe/.nvm/versions/node/v21.7.0/bin/node /Users/chenyongzhe/.yarn/bin/yarn.js test
+  /Users/chenyongzhe/.nvm/versions/node/v21.7.0/bin/node /Users/chenyongzhe/.yarn/bin/yarn.js add crawlWebsiteConnectedness
 
 PATH: 
   /Users/chenyongzhe/Library/Python/3.8/bin:/Users/chenyongzhe/.yarn/bin:/Users/chenyongzhe/.config/yarn/global/node_modules/.bin:/Users/chenyongzhe/go/bin:/Users/chenyongzhe/.rvm/gems/ruby-2.7.3/bin:/Users/chenyongzhe/.rvm/gems/ruby-2.7.3@global/bin:/Users/chenyongzhe/.rvm/rubies/ruby-2.7.3/bin:/Users/chenyongzhe/.nvm/versions/node/v21.7.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/iTerm.app/Contents/Resources/utilities:/Users/chenyongzhe/.rvm/bin:/Users/chenyongzhe/.rvm/bin
@@ -14,12 +14,17 @@ Platform:
   darwin arm64
 
 Trace: 
-  SyntaxError: /Users/chenyongzhe/blog/backend/package.json: Unexpected token 'u', ..."__APP__": undefined,"... is not valid JSON
-      at JSON.parse (<anonymous>)
-      at /Users/chenyongzhe/.yarn/lib/cli.js:1629:59
-      at Generator.next (<anonymous>)
-      at step (/Users/chenyongzhe/.yarn/lib/cli.js:310:30)
-      at /Users/chenyongzhe/.yarn/lib/cli.js:321:13
+  Error: https://registry.yarnpkg.com/crawlWebsiteConnectedness: Not found
+      at params.callback [as _callback] (/Users/chenyongzhe/.yarn/lib/cli.js:66145:18)
+      at self.callback (/Users/chenyongzhe/.yarn/lib/cli.js:140890:22)
+      at Request.emit (node:events:519:28)
+      at Request.<anonymous> (/Users/chenyongzhe/.yarn/lib/cli.js:141862:10)
+      at Request.emit (node:events:519:28)
+      at IncomingMessage.<anonymous> (/Users/chenyongzhe/.yarn/lib/cli.js:141784:12)
+      at Object.onceWrapper (node:events:633:28)
+      at IncomingMessage.emit (node:events:531:35)
+      at endReadableNT (node:internal/streams/readable:1696:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
 
 npm manifest: 
   {
@@ -29,27 +34,13 @@ npm manifest:
     "type": "module",
     "main": "index.js",
     "scripts": {
-      "integration-test": "NODE_ENV=test jest --forceExit --detectOpenHandles ./tests/integration.test.test",
+      "integration-test": "NODE_ENV=test jest --forceExit --detectOpenHandles ./tests/integration.test.ts",
       "unit-test": "NODE_ENV=test jest --forceExit --detectOpenHandles --runInBand",
       "dev": "NODE_ENV=dev yarn start",
       "start": "yarn compile && node dist/server.js --experimental-modules",
       "eslint:fix": "eslint --debug --fix .",
       "compile": "tsc && tsc-alias",
       "debug": "nodemon --inspect-brk server.js"
-    },
-    "jest": {
-      "testPathIgnorePatterns": [
-        "/node_modules/",
-        ".tmp",
-        ".cache"
-      ],
-      "testEnvironment": "node",
-      "setupFilesAfterEnv": [
-        "./tests/helpers/integrationSetup.ts"
-      ],
-      "globals": {
-        "__APP__": undefined,
-      }
     },
     "keywords": [],
     "author": "",
@@ -80,6 +71,7 @@ npm manifest:
       "@eslint/js": "^9.3.0",
       "@types/cheerio": "^0.22.35",
       "@types/express": "^4.17.21",
+      "@types/glob": "^8.1.0",
       "@types/jest": "^29.5.12",
       "@types/jsonwebtoken": "^9.0.6",
       "@types/passport-jwt": "^4.0.1",
@@ -880,6 +872,14 @@ Lockfile:
       "@types/qs" "*"
       "@types/serve-static" "*"
   
+  "@types/glob@^8.1.0":
+    version "8.1.0"
+    resolved "https://registry.yarnpkg.com/@types/glob/-/glob-8.1.0.tgz#b63e70155391b0584dce44e7ea25190bbc38f2fc"
+    integrity sha512-IO+MJPVhoqz+28h1qLAcBEH2+xHMK6MTyHJc7MTnnYb6wsoLR29POVGJ7LycmVXIqyy/4/2ShP5sUwTXuOwb/w==
+    dependencies:
+      "@types/minimatch" "^5.1.2"
+      "@types/node" "*"
+  
   "@types/graceful-fs@^4.1.3":
     version "4.1.9"
     resolved "https://registry.yarnpkg.com/@types/graceful-fs/-/graceful-fs-4.1.9.tgz#2a06bc0f68a20ab37b3e36aa238be6abdf49e8b4"
@@ -935,6 +935,11 @@ Lockfile:
     version "1.3.5"
     resolved "https://registry.yarnpkg.com/@types/mime/-/mime-1.3.5.tgz#1ef302e01cf7d2b5a0fa526790c9123bf1d06690"
     integrity sha512-/pyBZWSLD2n0dcHE3hq8s8ZvcETHtEuF+3E7XVt0Ig2nvsVQXdghHVcEkIWjy9A0wKfTn97a/PSDYohKIlnP/w==
+  
+  "@types/minimatch@^5.1.2":
+    version "5.1.2"
+    resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-5.1.2.tgz#07508b45797cb81ec3f273011b054cd0755eddca"
+    integrity sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==
   
   "@types/ms@*":
     version "0.7.34"

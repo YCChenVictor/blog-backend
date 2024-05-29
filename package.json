@@ -8,7 +8,7 @@
     "integration-test": "NODE_ENV=test jest --forceExit --detectOpenHandles ./tests/integration.test.ts",
     "unit-test": "NODE_ENV=test jest --forceExit --detectOpenHandles --runInBand",
     "dev": "NODE_ENV=dev yarn start",
-    "start": "yarn compile && node dist/server.js --experimental-modules",
+    "start": "yarn compile && node dist/src/server.js --experimental-modules",
     "eslint:fix": "eslint --debug --fix .",
     "compile": "tsc && tsc-alias",
     "debug": "nodemon --inspect-brk server.js"
@@ -19,6 +19,7 @@
   "dependencies": {
     "axios": "^1.4.0",
     "cheerio": "^1.0.0-rc.12",
+    "crawl-website-connectedness": "^0.1.11",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
