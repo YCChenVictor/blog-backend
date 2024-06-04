@@ -7,8 +7,8 @@
   "scripts": {
     "integration-test": "NODE_ENV=test jest --forceExit --detectOpenHandles ./tests/integration.test.ts",
     "unit-test": "NODE_ENV=test jest --forceExit --detectOpenHandles --runInBand",
-    "dev": "NODE_ENV=dev yarn start",
-    "start": "yarn compile && node dist/src/server.js --experimental-modules",
+    "dev": "NODE_ENV=dev nodemon --watch 'src/**/*.ts' --ext 'ts' --exec 'yarn start'",
+    "start": "yarn compile && node dist/src/server.js",
     "eslint:fix": "eslint --debug --fix .",
     "compile": "tsc && tsc-alias",
     "debug": "nodemon --inspect-brk server.js"
